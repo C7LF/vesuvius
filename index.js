@@ -28,7 +28,7 @@ bot.on('ready', async () => {
 
   // Every Thursday at 18:00 UTC
   const job = new CronJob('0 18 * * 4', () => {
-    bot.channels.cache.get('572466530235973644').send(EpicFreeGames)
+    bot.channels.cache.get(process.env.TEMP_CHANNEL_ID).send(EpicFreeGames)
   }, null, true, 'UTC')
 
   job.start()

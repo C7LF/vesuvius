@@ -12,14 +12,16 @@ const DATA = require('./services/freeGames');
 
 bot.login(TOKEN)
 
+
+const TodayFormatted = new Date().toLocaleDateString()
+
+const EpicFreeGames = new EmbeddedMessage()
+  .setTitle(`${TodayFormatted}`)
+  .setAuthor('Epic Free Games', 'https://img.icons8.com/nolan/2x/epic-games.png', 'https://www.epicgames.com/store/en-US/free-games')
+  .setColor('#0078F2')
+
+
 bot.on('ready', async () => {
-
-  const TodayFormatted = new Date().toLocaleDateString()
-
-  const EpicFreeGames = new EmbeddedMessage()
-    .setTitle(`${TodayFormatted}`)
-    .setAuthor('Epic Free Games', 'https://img.icons8.com/nolan/2x/epic-games.png', 'https://www.epicgames.com/store/en-US/free-games')
-    .setColor('#0078F2')
 
   // The Games
   await DATA.FreeGameTitles.then(response =>
@@ -37,7 +39,10 @@ bot.on('ready', async () => {
 })
 
 bot.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong');
+  
+  // Show free games on .fg command
+  if (msg.content === '.fg') {
+    msg.reply(EpicFreeGames)
   }
+  
 })

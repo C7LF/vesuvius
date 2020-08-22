@@ -9,6 +9,9 @@ const EmbeddedMessage = require('./lib/embedded-message');
 const CronJob = require('cron').CronJob
 
 const DATA = require('./services/freeGames');
+const helpMessage = require('./commands/help/help')
+
+const commands = require('./commands/commands')
 
 bot.login(TOKEN)
 
@@ -42,7 +45,12 @@ bot.on('message', msg => {
   
   // Show free games on .fg command
   if (msg.content === '.fg') {
-    msg.reply(EpicFreeGames)
+    msg.channel.send(EpicFreeGames)
   }
-  
+
+  // Show help message on .help command
+  if(msg.content === '.help') {
+    msg.channel.send(helpMessage)
+  }
+
 })

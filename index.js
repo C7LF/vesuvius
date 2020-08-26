@@ -1,21 +1,30 @@
 require('dotenv').config()
 
+const Discord = require('discord.js')
+
 const {
   bot, 
   TOKEN 
 } = require('./config/client')
 
-const EmbeddedMessage = require('./lib/embedded-message');
+const EmbeddedMessage = require('./shared/embedded-message')
 
 const CronJob = require('cron').CronJob
 
-const DATA = require('./services/freeGames');
+const FreeGames = require('./services/freeGames');
+
 const helpMessage = require('./commands/help/help')
 
-const commands = require('./commands/commands')
+// Create command collection
+bot.commands = new Discord.Collection();
+const botCommands = require('./commands')
+
+// Populate command collection
+Object.keys(botCommands).map(key => {
+  bot.commands.set(botCommands[key].name, botCommands[key]);
+});
 
 bot.login(TOKEN)
-
 
 const TodayFormatted = new Date().toLocaleDateString()
 
@@ -28,7 +37,7 @@ const EpicFreeGames = new EmbeddedMessage()
 bot.on('ready', async () => {
 
   // The Games
-  await DATA.FreeGameTitles.then(response =>
+  await FreeGames.FreeGameTitles.then(response =>
     EpicFreeGames.setDescription(response.map(item => item.title))
   )
 
@@ -43,15 +52,20 @@ bot.on('ready', async () => {
 })
 
 bot.on('message', msg => {
-  
-  // Show free games on .fg command
-  if (msg.content === '.fg') {
-    msg.channel.send(EpicFreeGames)
-  }
 
-  // Show help message on .help command
-  if(msg.content === '.help') {
-    msg.channel.send(helpMessage)
+  const args = msg.content.split(/ +/);
+  const params = args[1]
+  const command = args.shift();
+
+  if (!bot.commands.has(command)) return;
+
+  try {
+    bot.commands.get(command).execute(msg, args, params);
+  } catch (error) {
+    console.error(error);
+    msg.reply('Error executing command!');
   }
 
 })
+
+module.exports.EpicFreeGames = EpicFreeGames

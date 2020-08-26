@@ -1,11 +1,19 @@
-const commands = require('../commands')
+const { prefix } = require('../../config/command-config')
 
-const EmbeddedMessage = require('../../lib/embedded-message')
+module.exports = {
+    name: `${prefix}help`,
+    description: 'Displays list of available commands',
+    execute(msg, args) {
+        msg.channel.send(helpMessage)
+    }
+}
+
+const EmbeddedMessage = require('../../shared/embedded-message')
 
 const helpMessage = new EmbeddedMessage()
     .setTitle('Available Commands')
     .setColor('#ea0000')
 
-Object.values(commands).forEach(cmd => helpMessage.addField(cmd.command, cmd.description))
+const commands = require('../index')
 
-module.exports = helpMessage
+Object.values(commands).forEach(cmd => helpMessage.addField(cmd.name, cmd.description))

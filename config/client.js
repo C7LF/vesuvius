@@ -1,10 +1,16 @@
 require('dotenv').config()
+const { Client, Collection } = require('discord.js');
 
-const Discord = require('discord.js')
+module.exports = class extends Client {
+	constructor() {
+		super();
 
-const bot = new Discord.Client()
-const TOKEN = process.env.TOKEN;
+		this.commands = new Collection();
 
-module.exports = {bot, TOKEN}
+        this.queue = new Map();
+        
+        this.login(process.env.TOKEN)
+	}
+};
 
 

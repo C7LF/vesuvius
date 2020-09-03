@@ -1,11 +1,7 @@
 require('dotenv').config()
 
 const Discord = require('discord.js')
-
-const {
-  bot, 
-  TOKEN 
-} = require('./config/client')
+const Bot = require('./config/client')
 
 const EmbeddedMessage = require('./shared/embedded-message')
 
@@ -15,16 +11,15 @@ const FreeGames = require('./services/freeGames');
 
 const helpMessage = require('./commands/help/help')
 
+const bot = new Bot()
+
 // Create command collection
-bot.commands = new Discord.Collection();
 const botCommands = require('./commands')
 
 // Populate command collection
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
-
-bot.login(TOKEN)
 
 const TodayFormatted = new Date().toLocaleDateString()
 

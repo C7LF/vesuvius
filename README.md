@@ -7,7 +7,8 @@ Work in progress, current features include:
 
  - Weekly posts with the latest Epic Games free game promotion.
  - Display current Epic free games
- - Create temporary Watch2gether room
+ - Create temporary Watch2Gether room
+ - Play YouTube audio, create queue, skip tracks, stop.
 
   
 ## Installation Steps

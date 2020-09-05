@@ -1,11 +1,7 @@
 require('dotenv').config()
 
 const Discord = require('discord.js')
-
-const {
-  bot, 
-  TOKEN 
-} = require('./config/client')
+const Bot = require('./config/client')
 
 const EmbeddedMessage = require('./shared/embedded-message')
 
@@ -15,16 +11,15 @@ const FreeGames = require('./services/freeGames');
 
 const helpMessage = require('./commands/help/help')
 
+const bot = new Bot()
+
 // Create command collection
-bot.commands = new Discord.Collection();
 const botCommands = require('./commands')
 
 // Populate command collection
 Object.keys(botCommands).map(key => {
   bot.commands.set(botCommands[key].name, botCommands[key]);
 });
-
-bot.login(TOKEN)
 
 const TodayFormatted = new Date().toLocaleDateString()
 
@@ -35,20 +30,23 @@ const EpicFreeGames = new EmbeddedMessage()
 
 
 bot.on('ready', async () => {
+  try {
+    // The Games
+    await FreeGames.FreeGameTitles.then(response =>
+      EpicFreeGames.setDescription(response.map(item => item.title))
+    )
 
-  // The Games
-  await FreeGames.FreeGameTitles.then(response =>
-    EpicFreeGames.setDescription(response.map(item => item.title))
-  )
+    // Every Thursday at 18:00 UTC
+    const job = new CronJob('0 18 * * 4', () => {
+      bot.channels.cache.get(process.env.TEMP_CHANNEL_ID).send(EpicFreeGames)
+    }, null, true, 'UTC')
 
-  // Every Thursday at 18:00 UTC
-  const job = new CronJob('0 18 * * 4', () => {
-    bot.channels.cache.get(process.env.TEMP_CHANNEL_ID).send(EpicFreeGames)
-  }, null, true, 'UTC')
+    job.start()
 
-  job.start()
-
-  console.info(`Logged in as ${bot.user.tag}!`);
+    console.info(`Logged in as ${bot.user.tag}!`);
+  } catch {
+    console.info("Error starting..")
+  }
 })
 
 bot.on('message', msg => {

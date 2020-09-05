@@ -30,20 +30,23 @@ const EpicFreeGames = new EmbeddedMessage()
 
 
 bot.on('ready', async () => {
+  try {
+    // The Games
+    await FreeGames.FreeGameTitles.then(response =>
+      EpicFreeGames.setDescription(response.map(item => item.title))
+    )
 
-  // The Games
-  await FreeGames.FreeGameTitles.then(response =>
-    EpicFreeGames.setDescription(response.map(item => item.title))
-  )
+    // Every Thursday at 18:00 UTC
+    const job = new CronJob('0 18 * * 4', () => {
+      bot.channels.cache.get(process.env.TEMP_CHANNEL_ID).send(EpicFreeGames)
+    }, null, true, 'UTC')
 
-  // Every Thursday at 18:00 UTC
-  const job = new CronJob('0 18 * * 4', () => {
-    bot.channels.cache.get(process.env.TEMP_CHANNEL_ID).send(EpicFreeGames)
-  }, null, true, 'UTC')
+    job.start()
 
-  job.start()
-
-  console.info(`Logged in as ${bot.user.tag}!`);
+    console.info(`Logged in as ${bot.user.tag}!`);
+  } catch {
+    console.info("Error starting..")
+  }
 })
 
 bot.on('message', msg => {

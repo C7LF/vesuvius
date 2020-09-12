@@ -9,7 +9,8 @@ w2gHeaders.append("Cookie", "w2glang=en; w2g_session_id=98fc5083ae93be1727027aeb
 const w2gBodyParams = url => {
     return new URLSearchParams({
         "share": url,
-        "api_key": process.env.W2G_KEY
+        "w2g_api_key": process.env.W2G_KEY,
+        "bg_color": "#D9D9D9"
     })
 }
 

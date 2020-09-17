@@ -1,12 +1,11 @@
-const Discord = require('discord.js')
+import  Discord from 'discord.js'
 
-class EmbeddedMessage {
+export default class EmbeddedMessage extends Discord.MessageEmbed {
     constructor() {
-        const DefaultEmbeddedMessage = new Discord.MessageEmbed()
+        super()
+        let DefaultEmbeddedMessage = new Discord.MessageEmbed()
         // .addField('\u200b', '──────────────────────')
         // .setFooter('Lord and Saviour')
         return DefaultEmbeddedMessage
     }
 }
-
-module.exports = EmbeddedMessage

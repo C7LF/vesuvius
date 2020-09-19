@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/C7LF/vesuvius.svg?branch=master)](https://travis-ci.org/C7LF/vesuvius)
+
 # Vesuvius
 A discord bot built for ruling over servers.
 

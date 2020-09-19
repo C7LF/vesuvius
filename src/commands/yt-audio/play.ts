@@ -10,6 +10,12 @@ export const PlayCommand: CommandPlay = {
   description: "Play audio from YouTube video",
   async execute(msg: any, args) {
     try {
+      const validYoutubeRegex = /((http(s)?:\/\/)?)(www\.)?((youtube\.com\/)|(youtu.be\/))[\S]+/
+      const isValidArgs = args && args[0] && args[0].match(validYoutubeRegex)
+
+      if(!isValidArgs) {
+        return msg.channel.send('Invalid arguments!')
+      }
       const queue = msg.client.queue;
       const serverQueue = msg.client.queue.get(msg.guild?.id);
 
@@ -24,7 +30,7 @@ export const PlayCommand: CommandPlay = {
       }
 
       if (!args) {
-        return msg.channel.send("Please enter a valid URL!");
+        return msg.channel.send("Please enter a URL!");
       }
 
       const songInfo = await ytdl.getInfo(args[0]);

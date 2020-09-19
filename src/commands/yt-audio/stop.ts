@@ -1,9 +1,9 @@
-const { prefix } = require('../../config/command-config')
+import { Command, prefix } from "../../config/command-config";
 
-module.exports = {
+export const StopCommand: Command = {
     name: `${prefix}stop`,
     description: 'Stop the songs in the queue',
-    execute(msg, args) {
+    execute(msg: any, args) {
         const serverQueue = msg.client.queue.get(msg.guild.id);
         
         if (!msg.member.voice.channel) return msg.channel.send('You have to be in a voice channel to stop the music!');

@@ -4,8 +4,8 @@ import { Client, Collection } from "discord.js";
 import { Command } from "./command-config";
 
 export default class extends Client {
-  commands: Collection<unknown, Command>;
-  queue: Map<any, any>;
+  public commands: Collection<unknown, Command>;
+  public queue: any;
 
   constructor() {
     super();

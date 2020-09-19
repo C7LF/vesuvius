@@ -7,4 +7,5 @@ export interface Command {
   name: string;
   description: string;
   execute: (message: Message, args?: string[]) => any;
+  play?: any
 }

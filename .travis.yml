@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - lts/*
+
+#   script:
+#     - "npm run lint"
+#     - "npm run test"
+
+# safelist
+branches:
+  only:
+    - master
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: vIIohhsln4DuCEDGTMQrBvNQUp/Zgjewu4tgE6L/c9Lb/d+ixoGb0GvvEIgizazJoTPsJ6nGx/yftRerqxCEBLJoBMAg6EmDoET7KrCokC8sWEx3IDLHczxlkimjStcYODP+r0dIyUOPQScyc1KMQeplLSIfk+vYA89Jj2Lwdxk2Tg2gOmCUngB8gC4xIowm3aCUF2vbsJv+bLZot7F/8bbjWTYLJQhttIakU04iZbSaTYKt6Lt/KH9fkC1lrPP8x7FSOwFjR0o/cwo92oTJ/ng4csUU/2KGqXCxgJa5SZxKhKJQ3ECnKEJedNFBNhfKHefCFPbXDjSNPtduXyD8RDiASDktmTMgsvNyBDptcMufA7PDIKmb3EXZdCDhuUtetsGf3KpDf3JPo8rVe+KqeYM4Hma64AEPGQ/zu/jxK0d6pzn1LKrqItxxx1TJ/WqexwSKHO6zxqty6iIl5x45KPQdbbWZ6RAUwTfTTHyRzUxb2KD2OXMLGUEoRZ1IEw9w1gVoSdvSMM32Ob9XE84a2HhyCo99Nal89YEaWNRvN4Ir53s4yl4NItVxJWOcWmtQl/VWPbGcRF32l1nW37jRIpi4GHjuqH0kFCEPGYXjANR1WhDoBvqj4GHUPdGiBvKlIpR76atstUkB/yh/UqOOwGg5zbo8g2kh3+R7BHkG1eo=

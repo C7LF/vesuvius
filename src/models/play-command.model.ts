@@ -1,4 +1,4 @@
-import { Command } from "../config/command-config";
+import { Command } from "./command.model";
 
 export interface CommandPlay extends Command {
   play: any;

@@ -1,4 +1,5 @@
-import { prefix, Command } from "../../config/command-config";
+import { prefix } from "../../config/command-config";
+import { Command } from "../../models/command.model";
 import EmbeddedMessage from "../../shared/embedded-message";
 import { BotCommands } from "../../commands/index";
 

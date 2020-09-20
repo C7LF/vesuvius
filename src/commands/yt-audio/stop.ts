@@ -1,4 +1,5 @@
-import { Command, prefix } from "../../config/command-config";
+import { prefix } from "../../config/command-config";
+import { Command } from "../../models/command.model";
 
 export const StopCommand: Command = {
     name: `${prefix}stop`,

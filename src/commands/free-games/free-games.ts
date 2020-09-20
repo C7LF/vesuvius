@@ -1,4 +1,5 @@
-import { prefix, Command } from "../../config/command-config";
+import { prefix } from "../../config/command-config";
+import { Command } from "../../models/command.model";
 import { validFreeGames } from "../../services/freeGames";
 import { FreeGamesModel } from "../../models/free-games.model";
 import { FreeGamesMessage } from "../../shared/free-games.embedded";

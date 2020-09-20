@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 import { Client, Collection } from "discord.js";
-import { Command } from "./command-config";
+import { Command } from "../models/command.model";
 
 export default class extends Client {
   public commands: Collection<unknown, Command>;

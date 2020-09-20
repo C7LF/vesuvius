@@ -1,4 +1,5 @@
-import { prefix, Command } from "../../config/command-config";
+import { prefix } from "../../config/command-config";
+import { Command } from "../../models/command.model";
 import { createRoom } from "../../services//create-room";
 
 export const WatchTogether: Command = {

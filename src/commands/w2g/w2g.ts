@@ -13,7 +13,9 @@ export const WatchTogether: Command = {
     msg.suppressEmbeds(true);
 
     if (args) {
-      await createRoom(args[0]).then((response) => (mes += response.streamkey));
+      await createRoom(args[0])
+        .then((response) => (mes += response.streamkey))
+        .catch((err) => console.log("Error creating room: ", err));
       msg.channel.send(mes);
     } else {
       msg.channel.send("Error executing command");

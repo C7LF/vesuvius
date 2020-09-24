@@ -4,7 +4,7 @@ import { Command } from "../../models/command.model";
 export const SkipCommand: Command = {
     name: `${prefix}skip`,
     description: 'Skip to next track in queue',
-    execute(msg: any, args): void {
+    execute(msg: any): void {
         const serverQueue = msg.client.queue.get(msg.guild.id)
 
         if(!msg.member.voice.channel) return msg.channel.send('You need to be in a voice channel to do that')

@@ -13,7 +13,9 @@ const getData = async (): Promise<any> => {
 };
 
 // get elements from free game data.
-const freeGameData: Promise<any> = getData().then((x) => x.data.Catalog.searchStore.elements);
+const freeGameData: Promise<any> = getData()
+  .then((x) => x.data.Catalog.searchStore.elements)
+  .then((err) => console.log("Error fetching data from EPIC.", err));
 
 // If effective date has passsed, the game is free, else coming soon.
 // Note for this: games on sale twice will have a effectiveDate value from the first time they were on sale

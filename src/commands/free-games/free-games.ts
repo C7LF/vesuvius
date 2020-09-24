@@ -8,9 +8,11 @@ export const FreeGames: Command = {
   name: `${prefix}fg`,
   description: "Displays list of current free games on Epic",
   async execute(msg) {
-    await validFreeGames.then((g: any) =>
+    await validFreeGames
+      .then((g: any) =>
         FreeGamesMessage.setDescription(g.map((x: FreeGamesModel) => x.title))
-    );
+      )
+      .catch((err) => console.log(err));
 
     await msg.channel.send(FreeGamesMessage);
   },

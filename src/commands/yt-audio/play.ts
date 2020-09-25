@@ -10,11 +10,11 @@ export const PlayCommand: CommandPlay = {
   description: "Play audio from YouTube video",
   async execute(msg: any, args) {
     try {
-      const validYoutubeRegex = /((http(s)?:\/\/)?)(www\.)?((youtube\.com\/)|(youtu.be\/))[\S]+/
-      const isValidArgs = args && args[0] && args[0].match(validYoutubeRegex)
+      const validYoutubeRegex = /((http(s)?:\/\/)?)(www\.)?((youtube\.com\/)|(youtu.be\/))[\S]+/;
+      const isValidArgs = args && args[0] && args[0].match(validYoutubeRegex);
 
-      if(!isValidArgs) {
-        return msg.channel.send('Invalid arguments!')
+      if (!isValidArgs) {
+        return msg.channel.send("Invalid arguments!");
       }
       const queue = msg.client.queue;
       const serverQueue = msg.client.queue.get(msg.guild?.id);
@@ -86,7 +86,7 @@ export const PlayCommand: CommandPlay = {
     }
 
     const dispatcher = serverQueue.connection
-      .play(ytdl(song.url))
+      .play(ytdl(song.url, { quality: "highestaudio", highWaterMark: 1 << 25 }))
       .on("finish", () => {
         serverQueue.songs.shift();
         this.play(msg, serverQueue.songs[0]);

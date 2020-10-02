@@ -23,7 +23,14 @@ const freeGameData: Promise<any> = getData()
 export const validFreeGames: Promise<FreeGamesModel> = freeGameData.then(
   (catalog) =>
     catalog.filter(
-      (game: FreeGamesModel) =>
-        Date.parse(game.effectiveDate) - Date.parse(Date()) < 0
+      (game: FreeGamesModel) => {
+        const today: Date = new Date()
+
+        // calculate if date has passed.
+        const validCalculation = Date.parse(game.effectiveDate) - Date.parse(today as any)
+
+        // If effective date has passed, but only by a maximum of two months
+        return validCalculation < 0 && validCalculation > -5184000000
+      }
     )
 );

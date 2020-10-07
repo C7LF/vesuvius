@@ -7,7 +7,7 @@ import { TextChannel } from "discord.js";
 import { BotCommands } from "./commands/index";
 import { FreeGamesModel } from "./models/free-games.model";
 import { validFreeGames } from "./services/freeGames";
-import { FreeGamesMessage } from "./shared/free-games.embedded";
+import EmbeddedMessage from "./shared/embedded-message";
 
 export const bot = new Bot();
 
@@ -23,7 +23,18 @@ bot.on("ready", () => {
     const freeGamesJob = new CronJob(
       "0 18 * * 1,4",
       async () => {
-        await validFreeGames.then((g: any) =>
+        const todayFormatted: string = new Date().toLocaleDateString();
+
+        const FreeGamesMessage = new EmbeddedMessage()
+          .setTitle(`${todayFormatted}`)
+          .setAuthor(
+            "Epic Free Games",
+            "https://img.icons8.com/nolan/2x/epic-games.png",
+            "https://www.epicgames.com/store/en-US/free-games"
+          )
+          .setColor("#0078F2");
+
+        await validFreeGames().then((g: any) =>
           FreeGamesMessage.setDescription(g.map((x: FreeGamesModel) => x.title))
         );
 

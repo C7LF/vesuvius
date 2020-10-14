@@ -2,14 +2,16 @@ require("dotenv").config();
 
 import Bot from "./config/client";
 import { CronJob } from "cron";
-import { TextChannel } from "discord.js";
+import { Message, TextChannel } from "discord.js";
 
 import { BotCommands } from "./commands/index";
 import { FreeGamesModel } from "./models/free-games.model";
 import { validFreeGames } from "./services/freeGames";
 import EmbeddedMessage from "./shared/embedded-message";
 
-export const bot = new Bot();
+export const bot: Bot = new Bot();
+
+const userCommand: Set<string> = new Set();
 
 // Create command collection
 // Populate command collection
@@ -66,7 +68,15 @@ bot.on("message", (msg) => {
   if (!bot.commands.has(command)) return;
 
   try {
-    bot.commands.get(command)?.execute(msg, args);
+    if (userCommand.has(msg.author.id)) {
+      msg.reply(`Woah there calm down`)
+    } else {
+      userCommand.add(msg.author.id);
+      bot.commands.get(command)?.execute(msg, args);
+      setTimeout(() => {
+        userCommand.delete(msg.author.id);
+      }, 60000);
+    }
   } catch (error) {
     console.error(error);
     msg.reply("Error executing command!");

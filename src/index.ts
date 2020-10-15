@@ -75,7 +75,7 @@ bot.on("message", (msg) => {
       bot.commands.get(command)?.execute(msg, args);
       setTimeout(() => {
         userCommand.delete(msg.author.id);
-      }, 60000);
+      }, 3000);
     }
   } catch (error) {
     console.error(error);

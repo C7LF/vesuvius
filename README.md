@@ -12,6 +12,8 @@ Work in progress, current features include:
  - Create temporary Watch2Gether room
  - Play YouTube audio, create queue, skip tracks, stop.
  - Command throttling
+ 
+Use `.help` to see list of commands.
   
 ## Installation Steps
 

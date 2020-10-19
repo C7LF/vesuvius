@@ -11,7 +11,9 @@ Work in progress, current features include:
  - Display current Epic free games
  - Create temporary Watch2Gether room
  - Play YouTube audio, create queue, skip tracks, stop.
-
+ - Command throttling
+ 
+Use `.help` to see list of commands.
   
 ## Installation Steps
 
@@ -21,6 +23,4 @@ Work in progress, current features include:
 
 3. Add Discord credentials in a `.env` file
 
-3. Run `node index.js`
-
-4. Interact with your Discord bot via your web browser
+3. Run `npm start`

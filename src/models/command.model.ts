@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 
-// command type
+// command type 
 export interface Command {
     name: string;
     description: string;

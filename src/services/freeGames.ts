@@ -25,20 +25,32 @@ const freeGameData = async (): Promise<any> => {
 export const validFreeGames = async (): Promise<FreeGamesModel> => {
   return await freeGameData().then((catalog) =>
     catalog.map((game: FreeGamesModel) => {
-      const today: Date = new Date();
       
-      // calculate if date has passed.
-      const validCalculation =
-        Date.parse(game.effectiveDate) - Date.parse(today as any);
-    
-      // If effective date has passed, but only by a maximum of two months
-      if (validCalculation < 0 && validCalculation > -5184000000) {
-        game.title+=' ➢ **FREE NOW**'
-      } else {
-        game.title+=' ➢ *Coming soon*'
+      // POTENTIALLY NOT NEEDED
+      // const today: Date = new Date();
+
+      // // calculate if date has passed.
+      // const validCalculation =
+      //   Date.parse(game.effectiveDate) - Date.parse(today as any);
+
+      // // If effective date has passed, but only by a maximum of two months
+      // if (validCalculation < 0 && validCalculation > -5184000000) {
+      //   game.title+=' ➢ **FREE NOW**'
+      // } else {
+      //   game.title+=' ➢ *Coming soon*'
+      // }
+
+      const promos = game.promotions;
+
+      if (promos.promotionalOffers.length > 0) {
+        game.title += " ➢ **FREE NOW**";
+      } else if (promos.upcomingPromotionalOffers[0].promotionalOffers.length > 0) {
+        game.title += ` ➢ *${new Date(
+          promos.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
+        ).toLocaleDateString()}*`;
       }
 
-      return game
+      return game;
     })
   );
 };

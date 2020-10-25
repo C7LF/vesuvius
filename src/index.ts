@@ -2,7 +2,7 @@ require("dotenv").config();
 
 import Bot from "./config/client";
 import { CronJob } from "cron";
-import { Message, TextChannel } from "discord.js";
+import { TextChannel } from "discord.js";
 
 import { BotCommands } from "./commands/index";
 import { FreeGamesModel } from "./models/free-games.model";

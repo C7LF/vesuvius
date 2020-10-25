@@ -4,6 +4,8 @@ import { ENDPOINTS } from "../config/endpoints";
 
 import { FreeGamesModel } from "../models/free-games.model";
 
+import { properDateFormat } from "../shared/helpers/proper-date-format";
+
 // Get data
 // TODO: Abstact out?
 const getData = async (): Promise<any> => {
@@ -25,7 +27,6 @@ const freeGameData = async (): Promise<any> => {
 export const validFreeGames = async (): Promise<FreeGamesModel> => {
   return await freeGameData().then((catalog) =>
     catalog.map((game: FreeGamesModel) => {
-      
       // POTENTIALLY NOT NEEDED
       // const today: Date = new Date();
 
@@ -44,10 +45,14 @@ export const validFreeGames = async (): Promise<FreeGamesModel> => {
 
       if (promos.promotionalOffers.length > 0) {
         game.title += " ➢ **FREE NOW**";
-      } else if (promos.upcomingPromotionalOffers[0].promotionalOffers.length > 0) {
-        game.title += ` ➢ *${new Date(
-          promos.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
-        ).toLocaleDateString()}*`;
+      } else if (
+        promos.upcomingPromotionalOffers[0].promotionalOffers.length > 0
+      ) {
+        game.title += ` ➢ *${properDateFormat(
+          new Date(
+            promos.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
+          )
+        )}*`;
       }
 
       return game;

@@ -3,12 +3,13 @@ import { Command } from "../../models/command.model";
 import { validFreeGames } from "../../services/freeGames";
 import { FreeGamesModel } from "../../models/free-games.model";
 import EmbeddedMessage from "../../shared/embedded-message";
+import { properDateFormat } from "../../shared/helpers/proper-date-format";
 
 export const FreeGames: Command = {
   name: `${prefix}fg`,
   description: "Displays list of current free games on Epic",
   async execute(msg) {
-    const todayFormatted: string = new Date().toLocaleDateString();
+    const todayFormatted: string = properDateFormat(new Date());
 
     const FreeGamesMessage = new EmbeddedMessage()
       .setTitle(`${todayFormatted}`)

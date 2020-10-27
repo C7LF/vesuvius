@@ -7,6 +7,8 @@ export const StopCommand: Command = {
     execute(msg: any): void {
         const serverQueue = msg.client.queue.get(msg.guild.id);
         
+        if (!serverQueue) return msg.channel.send('No song playing, fool!');
+
         if (!msg.member.voice.channel) return msg.channel.send('You have to be in a voice channel to stop the music!');
         
         serverQueue.songs = [];

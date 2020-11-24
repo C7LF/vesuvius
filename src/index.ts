@@ -6,7 +6,7 @@ import { TextChannel } from "discord.js";
 
 import { BotCommands } from "./commands/index";
 import { FreeGamesModel } from "./models/free-games.model";
-import { validFreeGames } from "./services/freeGames";
+import { validFreeGames } from "./services/free-games";
 import EmbeddedMessage from "./shared/embedded-message";
 
 export const bot: Bot = new Bot();

@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 
 import { ENDPOINTS } from "../config/endpoints";
 
-import { FreeGamesModel } from "../models/free-games.model";
+import { FreeGamesModel } from "../models";
 
 import { properDateFormat } from "../shared/helpers/proper-date-format";
 

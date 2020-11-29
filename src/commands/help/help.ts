@@ -1,7 +1,7 @@
 import { prefix } from "../../config/command-config";
-import { Command } from "../../models/command.model";
+import { Command } from "../../models";
 import EmbeddedMessage from "../../shared/embedded-message";
-import { BotCommands } from "../../commands/index";
+import { BotCommands } from "../../commands";
 
 export const HelpCommand: Command = {
   name: `${prefix}help`,

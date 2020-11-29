@@ -1,4 +1,4 @@
-import { Command } from "../models/command.model";
+import { Command } from "../models";
 import { HelpCommand } from "./help/help";
 import { FreeGames } from "./free-games/free-games";
 import { WatchTogether } from "./w2g/w2g";

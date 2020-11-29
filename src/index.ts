@@ -5,7 +5,7 @@ import { CronJob } from "cron";
 import { TextChannel } from "discord.js";
 
 import { BotCommands } from "./commands/index";
-import { FreeGamesModel } from "./models/free-games.model";
+import { FreeGamesModel } from "./models";
 import { validFreeGames } from "./services/free-games";
 import EmbeddedMessage from "./shared/embedded-message";
 

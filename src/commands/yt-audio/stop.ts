@@ -1,5 +1,5 @@
 import { prefix } from "../../config/command-config";
-import { Command } from "../../models/command.model";
+import { Command } from "../../models";
 
 export const StopCommand: Command = {
     name: `${prefix}stop`,

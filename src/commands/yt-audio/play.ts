@@ -1,9 +1,7 @@
 import { prefix } from "../../config/command-config";
 import ytdl from "ytdl-core";
 
-import { Song } from "../../models/song.model";
-import { QueueContruct } from "../../models/queue-construct.model";
-import { CommandPlay } from "../../models/play-command.model";
+import { Song, QueueContruct, CommandPlay } from "../../models";
 
 export const PlayCommand: CommandPlay = {
   name: `${prefix}play`,

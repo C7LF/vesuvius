@@ -2,8 +2,7 @@ import fetch from "node-fetch";
 import { URLSearchParams } from "url";
 import { ENDPOINTS } from "../config/endpoints";
 
-import { RequestModel } from "../models/request.model";
-import { WatchTogetherRoomModel } from "../models/watch-together-room.model";
+import { RequestModel, WatchTogetherRoomModel } from "../models";
 
 const w2gBodyParams = (url: string): URLSearchParams => {
   return new URLSearchParams({

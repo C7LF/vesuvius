@@ -1,7 +1,6 @@
 import { prefix } from "../../config/command-config";
-import { Command } from "../../models/command.model";
+import { Command, FreeGamesModel } from "../../models";
 import { validFreeGames } from "../../services/free-games";
-import { FreeGamesModel } from "../../models/free-games.model";
 import EmbeddedMessage from "../../shared/embedded-message";
 import { properDateFormat } from "../../shared/helpers/proper-date-format";
 

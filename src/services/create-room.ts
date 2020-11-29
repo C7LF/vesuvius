@@ -2,7 +2,8 @@ import fetch from "node-fetch";
 import { URLSearchParams } from "url";
 import { ENDPOINTS } from "../config/endpoints";
 
-import { RequestModel} from '../models/request.model'
+import { RequestModel } from "../models/request.model";
+import { WatchTogetherRoomModel } from "../models/watch-together-room.model";
 
 const w2gBodyParams = (url: string): URLSearchParams => {
   return new URLSearchParams({
@@ -21,8 +22,11 @@ const requestOptions = (url: string): RequestModel => {
   return reqOps;
 };
 
-export const createRoom = async (url: string): Promise<any> => {
+export const createRoom = async (
+  url: string
+): Promise<WatchTogetherRoomModel> => {
   const response = await fetch(ENDPOINTS.W2G, requestOptions(url));
   const body = await response.json();
+  console.log(body);
   return body;
 };

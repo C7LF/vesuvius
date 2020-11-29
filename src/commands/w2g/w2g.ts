@@ -1,6 +1,6 @@
 import { prefix } from "../../config/command-config";
 import { Command } from "../../models/command.model";
-import { createRoom } from "../../services//create-room";
+import { createRoom } from "../../services/create-room";
 
 export const WatchTogether: Command = {
   name: `${prefix}w2g`,

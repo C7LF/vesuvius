@@ -90,7 +90,10 @@ export const PlayCommand: CommandPlay = {
         this.play(msg, serverQueue.songs[0]);
       })
       // TODO?: potentially repeat play steps if video metadata error occurs, try 5 times?
-      .on("error", (error: any) => console.error(error));
+      .on("error", (error: any) => {
+        msg.channel.send("Error playing");
+        console.error(error);
+      });
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
     serverQueue.textChannel.send(`Started playing: **${song.title}**`);
   },

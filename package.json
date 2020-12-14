@@ -8,7 +8,8 @@
     "start": "ts-node ./src/index.ts",
     "dev": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "tsc -p . && pm2 start ./dist/index.js --name 'vesuvius'"
+    "serve": "tsc -p . && pm2 start ./dist/index.js --name 'vesuvius'",
+    "lint": "eslint . --ext .ts"
   },
   "author": "Callum",
   "license": "ISC",
@@ -28,6 +29,9 @@
     "ytdl-core": "^4.1.5"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.15.0",
     "nodemon": "^2.0.6"
   }
 }

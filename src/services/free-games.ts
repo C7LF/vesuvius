@@ -21,28 +21,33 @@ const freeGameData = async (): Promise<any> => {
     .catch((err) => console.log("Error fetching data from EPIC.", err));
 };
 
-// If effective date has passsed, the game is free, else coming soon.
-// Note for this: games on sale twice will have a effectiveDate value from the first time they were on sale
-// TODO: logic needed to detect the dates far in the past and change the data from effectiveData to startDate.
-export const validFreeGames = async (): Promise<FreeGamesModel> => {
-  return await freeGameData().then((catalog) =>
-    catalog.map((game: FreeGamesModel) => {
+// If effective date has passsed, the game is free, else display date.
+export const validFreeGames = async (): Promise<FreeGamesModel[]> => {
+  const freeGamesList: Array<FreeGamesModel> = [];
 
+  await freeGameData().then((catalog) =>
+    catalog.forEach((game: FreeGamesModel) => {
       const promos = game.promotions;
 
-      if (promos.promotionalOffers.length > 0) {
-        game.title += " ➢ **FREE NOW**";
+      if (promos.promotionalOffers.length) {
+        let gameFreeNow = { ...game, title: `${game.title} ➢ **FREE NOW**` };
+        freeGamesList.push(gameFreeNow);
       } else if (
-        promos.upcomingPromotionalOffers[0].promotionalOffers.length > 0
+        promos.upcomingPromotionalOffers.length &&
+        promos.upcomingPromotionalOffers[0].promotionalOffers.length
       ) {
-        game.title += ` ➢ *${properDateFormat(
-          new Date(
-            promos.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
-          )
-        )}*`;
+        let gameFreeFuture = {
+          ...game,
+          title: `${game.title} ➢ *${properDateFormat(
+            new Date(
+              promos.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
+            )
+          )}*`,
+        };
+        freeGamesList.push(gameFreeFuture);
       }
-
-      return game;
     })
   );
+
+  return freeGamesList;
 };

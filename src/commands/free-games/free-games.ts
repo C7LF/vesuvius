@@ -21,7 +21,11 @@ export const FreeGames: Command = {
 
     await validFreeGames()
       .then((g: any) =>
-        FreeGamesMessage.setDescription(g.map((x: FreeGamesModel) => x.title))
+        g
+          ? FreeGamesMessage.setDescription(
+              g.map((x: FreeGamesModel) => x.title)
+            )
+          : FreeGamesMessage.setDescription("No games 😢")
       )
       .catch((err) => console.log(err));
 

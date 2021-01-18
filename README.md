@@ -7,10 +7,10 @@ A discord bot built for ruling over servers.
 ## Features
 Work in progress, current features include:
 
- - Weekly posts with the latest Epic Games free game promotion.
+ - Weekly posts with the latest Epic Games free game promotion
  - Display current Epic free games
  - Create temporary Watch2Gether room
- - Play YouTube audio, create queue, skip tracks, stop.
+ - Play YouTube audio, create queue, skip tracks, stop
  - Command throttling
  
 Use `.help` to see list of commands.

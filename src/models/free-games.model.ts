@@ -15,6 +15,9 @@ interface Offers {
   promotionalOffers: Array<{
     startDate: string;
     endDate: string;
-    discountSetting: Object;
+    discountSetting: {
+      discountType: string;
+      discountPercentage: number;
+    };
   }>;
 }

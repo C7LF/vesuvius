@@ -29,18 +29,25 @@ export const validFreeGames = async (): Promise<FreeGamesModel[]> => {
       const promos = game.promotions;
 
       if (promos) {
-        if (promos.promotionalOffers.length > 0) {
+        const { promotionalOffers, upcomingPromotionalOffers } = promos
+        
+        if (
+          promotionalOffers.length > 0 &&
+          promotionalOffers[0].promotionalOffers.some(
+            (x) => x.discountSetting.discountPercentage === 0
+          )
+        ) {
           let gameFreeNow = { ...game, title: `${game.title} ➢ **FREE NOW**` };
           freeGamesList.push(gameFreeNow);
         } else if (
-          promos.upcomingPromotionalOffers.length &&
-          promos.upcomingPromotionalOffers[0].promotionalOffers.length
+          upcomingPromotionalOffers.length &&
+          upcomingPromotionalOffers[0].promotionalOffers.length
         ) {
           let gameFreeFuture = {
             ...game,
             title: `${game.title} ➢ *${properDateFormat(
               new Date(
-                promos.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
+                upcomingPromotionalOffers[0].promotionalOffers[0].startDate
               )
             )}*`,
           };

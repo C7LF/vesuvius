@@ -3,7 +3,7 @@ import ytdl from "ytdl-core";
 
 import { Song, QueueContruct, CommandPlay } from "../../models";
 
-const PlayCommand: CommandPlay = {
+export const PlayCommand: CommandPlay = {
   name: `${prefix}play`,
   description: "Play audio from YouTube video",
   async execute(msg: any, args) {
@@ -98,5 +98,3 @@ const PlayCommand: CommandPlay = {
     serverQueue.textChannel.send(`Started playing: **${song.title}**`);
   },
 };
-
-export = PlayCommand;

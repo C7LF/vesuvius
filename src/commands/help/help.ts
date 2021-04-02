@@ -1,9 +1,9 @@
 import { prefix } from "../../config/command-config";
 import { Command } from "../../models";
 import EmbeddedMessage from "../../shared/embedded-message";
-import { bot } from "../../index"
+import { BotCommands } from "../../commands";
 
-const HelpCommand: Command = {
+export const HelpCommand: Command = {
   name: `${prefix}help`,
   description: "Displays list of available commands",
   execute: (msg): Promise<any> => {
@@ -11,12 +11,10 @@ const HelpCommand: Command = {
       .setTitle("Available Commands")
       .setColor("#ea0000");
 
-    bot.commands.forEach((cmd) =>
+    Object.values(BotCommands).forEach((cmd) =>
       helpMessage.addField(cmd.name, cmd.description)
     );
 
     return msg.channel.send(helpMessage);
   },
 };
-
-export = HelpCommand

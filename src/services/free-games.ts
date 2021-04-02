@@ -4,7 +4,7 @@ import { ENDPOINTS } from "../config/endpoints";
 
 import { FreeGamesModel } from "../models";
 
-import { properDateFormat } from "../shared/helpers/proper-date-format";
+import { properDateFormat } from "../shared/utils/proper-date-format";
 
 // Get data
 // TODO: Abstact out?

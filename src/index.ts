@@ -60,6 +60,7 @@ bot.on("ready", () => {
     freeGamesJob.start();
 
     console.info(`Logged in as ${bot.user?.tag}!`);
+    console.log(bot.commands)
   } catch {
     console.info("Error starting..");
   }

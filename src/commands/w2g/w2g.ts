@@ -2,7 +2,7 @@ import { prefix } from "../../config/command-config";
 import { Command } from "../../models";
 import { createRoom } from "../../services/create-room";
 
-const WatchTogether: Command = {
+export const WatchTogether: Command = {
   name: `${prefix}w2g`,
   description: "Create a temporary watch together room",
   async execute(msg, args) {
@@ -22,5 +22,3 @@ const WatchTogether: Command = {
     }
   },
 };
-
-export = WatchTogether

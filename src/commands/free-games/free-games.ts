@@ -2,9 +2,9 @@ import { prefix } from "../../config/command-config";
 import { Command, FreeGamesModel } from "../../models";
 import { validFreeGames } from "../../services/free-games";
 import EmbeddedMessage from "../../shared/embedded-message";
-import { properDateFormat } from "../../shared/utils/proper-date-format";
+import { properDateFormat } from "../../shared/helpers/proper-date-format";
 
-const FreeGames: Command = {
+export const FreeGames: Command = {
   name: `${prefix}fg`,
   description: "Displays list of current free games on Epic",
   async execute(msg) {
@@ -32,5 +32,3 @@ const FreeGames: Command = {
     await msg.channel.send(FreeGamesMessage);
   },
 };
-
-export = FreeGames

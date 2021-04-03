@@ -26,6 +26,5 @@ export const createRoom = async (
 ): Promise<WatchTogetherRoomModel> => {
   const response = await fetch(ENDPOINTS.W2G, requestOptions(url));
   const body = await response.json();
-  console.log(body);
   return body;
 };

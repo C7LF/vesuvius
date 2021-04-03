@@ -20,7 +20,6 @@ const commandsList = getFiles(directoryPath);
 // Populate command collection
 commandsList.map((file) => {
   const command = require(file) as Command;
-  console.log('file', file)
   bot.commands.set(command.name, command);
 });
 

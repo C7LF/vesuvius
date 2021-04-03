@@ -10,7 +10,7 @@ export const getFiles = (path: fs.PathLike) => {
     if (fs.lstatSync(file).isDirectory()) {
       files = files.concat(getFiles(file));
     }
-    if (file.endsWith(".ts")) {
+    if (file.endsWith(".ts") || file.endsWith(".js")) {
       files.push(file);
     }
   });

@@ -20,6 +20,7 @@ const commandsList = getFiles(directoryPath);
 // Populate command collection
 commandsList.map((file) => {
   const command = require(file) as Command;
+  console.log('file', file)
   bot.commands.set(command.name, command);
 });
 
@@ -60,6 +61,7 @@ bot.on("ready", () => {
     freeGamesJob.start();
 
     console.info(`Logged in as ${bot.user?.tag}!`);
+    console.log(bot.commands)
   } catch {
     console.info("Error starting..");
   }

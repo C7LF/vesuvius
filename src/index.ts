@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+import path from 'path';
 import Bot from "./config/client";
 import { CronJob } from "cron";
 import { TextChannel } from "discord.js";
@@ -13,11 +14,12 @@ export const bot: Bot = new Bot();
 
 const userCommand: Set<string> = new Set();
 
-const commandsList = getFiles("./src/commands");
+const directoryPath = path.join(__dirname, '/commands');
+const commandsList = getFiles(directoryPath);
 
 // Populate command collection
 commandsList.map((file) => {
-  const command = require(file.replace("/src", "")) as Command;
+  const command = require(file) as Command;
   bot.commands.set(command.name, command);
 });
 

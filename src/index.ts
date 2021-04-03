@@ -1,22 +1,26 @@
 require("dotenv").config();
 
+import path from "path";
 import Bot from "./config/client";
 import { CronJob } from "cron";
 import { TextChannel } from "discord.js";
 
-import { BotCommands } from "./commands/index";
-import { FreeGamesModel } from "./models";
+import { Command, FreeGamesModel } from "./models";
 import { validFreeGames } from "./services/free-games";
 import EmbeddedMessage from "./shared/embedded-message";
+import { getFiles } from "./shared/utils/get-files-in-directory";
 
 export const bot: Bot = new Bot();
 
 const userCommand: Set<string> = new Set();
 
-// Create command collection
+const directoryPath = path.join(__dirname, "/commands");
+const commandsList = getFiles(directoryPath);
+
 // Populate command collection
-Object.keys(BotCommands).map((key) => {
-  bot.commands.set(BotCommands[key].name, BotCommands[key]);
+commandsList.map((file) => {
+  const command = require(file) as Command;
+  bot.commands.set(command.name, command);
 });
 
 bot.on("ready", () => {
@@ -69,7 +73,7 @@ bot.on("message", (msg) => {
 
   try {
     if (userCommand.has(msg.author.id)) {
-      msg.reply(`Woah there calm down`)
+      msg.reply(`Woah there calm down`);
     } else {
       userCommand.add(msg.author.id);
       bot.commands.get(command)?.execute(msg, args);

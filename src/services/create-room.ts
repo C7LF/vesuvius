@@ -7,7 +7,7 @@ import { RequestModel, WatchTogetherRoomModel } from "../models";
 const w2gBodyParams = (url: string): URLSearchParams => {
   return new URLSearchParams({
     share: url,
-    w2g_api_key: process.env.W2G_KEY,
+    w2g_api_key: process.env.W2G_KEY || '',
     bg_color: "#D9D9D9",
   });
 };

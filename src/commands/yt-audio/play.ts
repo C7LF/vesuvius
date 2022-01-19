@@ -66,7 +66,7 @@ const PlayCommand: CommandPlay = {
           `**${song.title}** has been added to the queue!`
         );
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       msg.channel.send(error.msg);
     }

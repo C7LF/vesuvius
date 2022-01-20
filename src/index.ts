@@ -45,9 +45,9 @@ bot.on("ready", () => {
         );
 
         if (process.env.TEMP_CHANNEL_ID) {
-          (bot.channels.cache.get(
-            process.env.TEMP_CHANNEL_ID
-          ) as TextChannel).send(FreeGamesMessage);
+          (
+            bot.channels.cache.get(process.env.TEMP_CHANNEL_ID) as TextChannel
+          ).send(FreeGamesMessage);
         } else {
           console.info("Add channel env variable...");
         }

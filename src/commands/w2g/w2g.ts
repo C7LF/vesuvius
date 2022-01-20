@@ -6,8 +6,8 @@ const watchTogetherExecute = () => async (msg: Message, args?: string[]) => {
   // Base Url
   let mes = "https://w2g.tv/rooms/";
 
-  // Remove embedded message
-  msg.suppressEmbeds(true);
+  // Remove embedded message NOT WORKING
+  // msg.suppressEmbeds(true);
 
   if (args) {
     await createRoom(args[0])

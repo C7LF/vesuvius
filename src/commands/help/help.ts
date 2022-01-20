@@ -1,22 +1,22 @@
-import { prefix } from "../../config/command-config";
-import { Command } from "../../models";
 import EmbeddedMessage from "../../shared/embedded-message";
 import { bot } from "../../index";
+import VesuviusCommand from "../../models/vesuvius-command.class";
+import { Message } from "discord.js";
 
-const HelpCommand: Command = {
-  name: `${prefix}help`,
-  description: "Displays list of available commands",
-  execute: (msg): Promise<any> => {
-    const helpMessage = new EmbeddedMessage()
-      .setTitle("Available Commands")
-      .setColor("#ea0000");
+const helpExecute = () => (msg: Message) => {
+  const helpMessage = new EmbeddedMessage()
+    .setTitle("Available Commands")
+    .setColor("#ea0000");
 
-    bot.commands.forEach((cmd) =>
-      helpMessage.addField(cmd.name, cmd.description)
-    );
+  bot.commands.forEach((cmd) =>
+    helpMessage.addField(cmd.name, cmd.description)
+  );
 
-    return msg.channel.send(helpMessage);
-  },
+  return msg.channel.send(helpMessage);
 };
 
-export = HelpCommand;
+export = new VesuviusCommand(
+  "help",
+  "Displays a list of available commands",
+  helpExecute()
+);

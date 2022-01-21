@@ -11,7 +11,7 @@ const helpExecute = () => (msg: Message) => {
   bot.commands.forEach((cmd) =>
     helpMessage.addField(cmd.name, cmd.description)
   );
-
+  console.log('test', helpMessage)
   return msg.channel.send(helpMessage);
 };
 

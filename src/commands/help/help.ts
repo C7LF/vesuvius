@@ -8,10 +8,11 @@ const helpExecute = () => (msg: Message) => {
     .setTitle("Available Commands")
     .setColor("#ea0000");
 
-  bot.commands.forEach((cmd) =>
-    helpMessage.addField(cmd.name, cmd.description)
+  bot.commands.forEach(
+    ({ name, description }) =>
+      name && description && helpMessage.addField(name, description)
   );
-  console.log('test', helpMessage)
+
   return msg.channel.send(helpMessage);
 };
 

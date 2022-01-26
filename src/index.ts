@@ -1,13 +1,8 @@
-require("dotenv").config();
-
 import path from "path";
 import Bot from "./config/client";
-import { CronJob } from "cron";
-import { TextChannel } from "discord.js";
 
-import { Command, FreeGamesModel } from "./models";
-import { validFreeGames } from "./services/free-games";
-import EmbeddedMessage from "./shared/embedded-message";
+import { Command } from "./models";
+import { freeGamesJob } from "./services/free-games";
 import { getFiles } from "./shared/utils/get-files-in-directory";
 
 export const bot: Bot = new Bot();
@@ -25,38 +20,6 @@ commandsList.map((file) => {
 
 bot.on("ready", () => {
   try {
-    // Every Monday & Thursday at 18:00 UTC
-    const freeGamesJob = new CronJob(
-      "0 18 * * 1,4",
-      async () => {
-        const todayFormatted: string = new Date().toLocaleDateString();
-
-        const FreeGamesMessage = new EmbeddedMessage()
-          .setTitle(`${todayFormatted}`)
-          .setAuthor(
-            "Epic Free Games",
-            "https://img.icons8.com/nolan/2x/epic-games.png",
-            "https://www.epicgames.com/store/en-US/free-games"
-          )
-          .setColor("#0078F2");
-
-        await validFreeGames().then((g: any) =>
-          FreeGamesMessage.setDescription(g.map((x: FreeGamesModel) => x.title))
-        );
-
-        if (process.env.TEMP_CHANNEL_ID) {
-          (
-            bot.channels.cache.get(process.env.TEMP_CHANNEL_ID) as TextChannel
-          ).send(FreeGamesMessage);
-        } else {
-          console.info("Add channel env variable...");
-        }
-      },
-      null,
-      true,
-      "UTC"
-    );
-
     freeGamesJob.start();
 
     console.info(`Logged in as ${bot.user?.tag}!`);

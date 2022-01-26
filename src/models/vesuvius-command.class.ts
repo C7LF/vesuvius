@@ -4,29 +4,21 @@ import { Command } from "./command.model";
 type Execute = Command["execute"];
 
 export default class VesuviusCommand {
-  private _commandName: string;
-  private _commandDescription: string;
-  private _commandExecute: Execute;
-
   constructor(
-    commandName: string,
-    commandDescription: string,
-    commandExecute: Execute
-  ) {
-    this._commandName = commandName;
-    this._commandDescription = commandDescription;
-    this._commandExecute = commandExecute;
-  }
+    private commandName: string,
+    private commandDescription: string,
+    private commandExecute: Execute
+  ) {}
 
   get name(): string {
-    return `${prefix}${this._commandName}`;
+    return `${prefix}${this.commandName}`;
   }
 
   get description(): string {
-    return this._commandDescription;
+    return this.commandDescription;
   }
 
   get execute() {
-    return this._commandExecute;
+    return this.commandExecute;
   }
 }

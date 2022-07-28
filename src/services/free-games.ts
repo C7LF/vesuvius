@@ -44,7 +44,7 @@ export const validFreeGames = async (): Promise<FreeGamesModel[]> => {
           )
         ) {
           let gameFreeNow = { ...game, title: `${game.title} ➢ **FREE NOW**` };
-          freeGamesList.push(gameFreeNow);
+          freeGamesList.unshift(gameFreeNow);
         } else if (
           upcomingPromotionalOffers.length &&
           upcomingPromotionalOffers[0].promotionalOffers.length

@@ -66,9 +66,9 @@ export const validFreeGames = async (): Promise<FreeGamesModel[]> => {
   return freeGamesList;
 };
 
-// Cron job for free games, every Monday & Thursday at 18:00 UTC
+// Cron job for free games, every Monday & Thursday at 18:00 UTC - "0 18 * * 1,4",
 export const freeGamesJob = new CronJob(
-  "0 18 * * 1,4",
+  "0 16 * * *",
   async () => {
     const todayFormatted: string = new Date().toLocaleDateString();
 
